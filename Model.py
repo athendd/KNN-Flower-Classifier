@@ -11,54 +11,54 @@ from sklearn.metrics import accuracy_score
 
 iris = sns.load_dataset("iris")
 df = pd.DataFrame(iris)
-#print(df.head())
-#print(df.info())
-#print(df.describe())
-#print(df.dtypes)
+print(df.head())
+print(df.info())
+print(df.describe())
+print(df.dtypes)
 
-#sepal_length is float, sepal_width is float, petal_length is float, petal_width is float, species is object
-#petal_length and petal_width might have outliers
-#all appear to have no null values
-#print(df.isnull().sum())
+sepal_length is float, sepal_width is float, petal_length is float, petal_width is float, species is object
+petal_length and petal_width might have outliers
+all appear to have no null values
+print(df.isnull().sum())
 #no null values in the dataset
 
 df['species'] = df['species'].astype('category')
 target = df['species']
 columns = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
-#correlation_matrix = df[columns].corr()
-#sns.heatmap(data = correlation_matrix, annot = True)
-#plt.savefig('/workspaces/One/heatmap.png')  # Save the plot as an image
-#plt.show()
-#plt.clf()
+correlation_matrix = df[columns].corr()
+sns.heatmap(data = correlation_matrix, annot = True)
+plt.savefig('/workspaces/One/heatmap.png')  # Save the plot as an image
+plt.show()
+plt.clf()
 
 
-#plt.boxplot(df['sepal_length'])
-#plt.show()
-#plt.clf()
-#lt.boxplot(df['sepal_width'])
-#plt.savefig('sepal_width.png')
-#plt.show()
-#plt.clf()
-#plt.boxplot(df['petal_length'])
-#plt.savefig('petal_length.png')
-#plt.show()
-#plt.clf()
-#plt.boxplot(df['petal_width'])
-#plt.savefig('petal_width.png')
-##plt.clf()
+plt.boxplot(df['sepal_length'])
+plt.show()
+plt.clf()
+plt.boxplot(df['sepal_width'])
+plt.savefig('sepal_width.png')
+plt.show()
+plt.clf()
+plt.boxplot(df['petal_length'])
+plt.savefig('petal_length.png')
+plt.show()
+plt.clf()
+plt.boxplot(df['petal_width'])
+plt.savefig('petal_width.png')
+plt.clf()
 
 #sepal_width is the only column with outliers
-#plt.hist(df['sepal_width'])
-#plt.savefig('sepal_width_hist.png')
-#plt.show()
-#plt.clf()
+plt.hist(df['sepal_width'])
+plt.savefig('sepal_width_hist.png')
+plt.show()
+plt.clf()
 upper_limit = 0.095
 lower_limit = 0.009
 df['sepal_width'] = winsorize(df['sepal_width'], limits = (lower_limit, upper_limit))
-#plt.boxplot(df['sepal_width'])
-#plt.savefig('updated_sepal_width.png')
-#plt.show()
-#plt.clf()
+plt.boxplot(df['sepal_width'])
+plt.savefig('updated_sepal_width.png')
+plt.show()
+plt.clf()
 scaler = StandardScaler()
 x = scaler.fit_transform(df[columns])
 y = df['species']
